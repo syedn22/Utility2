@@ -1,21 +1,41 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React from "react";
+import { createStackNavigator } from "@react-navigation/stack";
+import { NavigationContainer } from "@react-navigation/native";
 
-export default function App() {
+import MatrixScreen from "./app/screen/MatrixScreen";
+import LogCalculatorScreen from "./app/screen/LogCalculatorScreen";
+import TrignometryCalculatorScreen from "./app/screen/TrignometryCalculatorScreen";
+import ElectricalCalculatorScreen from "./app/screen/ElectricalCalculatorScreen";
+import NumberScreen from "./app/screen/NumberScreen";
+import Screen from "./app/components/Screen";
+import MainScreen from "./app/screen/MainScreen";
+
+const Stack = createStackNavigator();
+const StackNavigator = () => (
+  <Stack.Navigator>
+    <Stack.Screen name="Utility" component={MainScreen} />
+    <Stack.Screen name="matrixscreen" component={MatrixScreen} />
+    <Stack.Screen
+      name="electriccalculator"
+      component={ElectricalCalculatorScreen}
+    />
+    <Stack.Screen name="logscreen" component={LogCalculatorScreen} />
+    <Stack.Screen
+      name="trignometryscreen"
+      component={TrignometryCalculatorScreen}
+    />
+    <Stack.Screen name="numberscreen" component={NumberScreen} />
+  </Stack.Navigator>
+);
+
+function App(props) {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+      <Screen>
+        <StackNavigator />
+      </Screen>
+    </NavigationContainer>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default App;
